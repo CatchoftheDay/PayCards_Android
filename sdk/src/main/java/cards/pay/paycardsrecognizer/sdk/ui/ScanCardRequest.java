@@ -15,6 +15,8 @@ public final class ScanCardRequest implements Parcelable {
 
     public static final boolean DEFAULT_GRAB_CARD_IMAGE = false;
 
+    public static final boolean DEFAULT_SHOW_POWERED_BY = true;
+
     private final boolean mEnableSound;
 
     private final boolean mScanExpirationDate;
@@ -23,9 +25,11 @@ public final class ScanCardRequest implements Parcelable {
 
     private final boolean mGrabCardImage;
 
+    private final boolean mShowPoweredBy;
+
     private static final ScanCardRequest sDefaultInstance = new ScanCardRequest(
             DEFAULT_ENABLE_SOUND, DEFAULT_SCAN_EXPIRATION_DATE, DEFAULT_SCAN_CARD_HOLDER,
-            DEFAULT_GRAB_CARD_IMAGE);
+            DEFAULT_GRAB_CARD_IMAGE, DEFAULT_SHOW_POWERED_BY);
 
     public static ScanCardRequest getDefault() {
         return sDefaultInstance;
@@ -34,11 +38,13 @@ public final class ScanCardRequest implements Parcelable {
     public ScanCardRequest(boolean enableSound,
                            boolean scanExpirationDate,
                            boolean scanCardHolder,
-                           boolean grabCardImage) {
+                           boolean grabCardImage,
+                           boolean showPoweredBy) {
         this.mEnableSound = enableSound;
         this.mScanExpirationDate = scanExpirationDate;
         this.mScanCardHolder = scanCardHolder;
         this.mGrabCardImage = grabCardImage;
+        this.mShowPoweredBy = showPoweredBy;
     }
 
     public boolean isSoundEnabled() {
@@ -57,6 +63,10 @@ public final class ScanCardRequest implements Parcelable {
         return mGrabCardImage;
     }
 
+    public boolean isShowPoweredBy() {
+        return mShowPoweredBy;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,7 +77,8 @@ public final class ScanCardRequest implements Parcelable {
         if (mEnableSound != that.mEnableSound) return false;
         if (mScanExpirationDate != that.mScanExpirationDate) return false;
         if (mScanCardHolder != that.mScanCardHolder) return false;
-        return mGrabCardImage == that.mGrabCardImage;
+        if (mGrabCardImage != that.mGrabCardImage) return false;
+        return mShowPoweredBy == that.mShowPoweredBy;
     }
 
     @Override
@@ -76,6 +87,7 @@ public final class ScanCardRequest implements Parcelable {
         result = 31 * result + (mScanExpirationDate ? 1 : 0);
         result = 31 * result + (mScanCardHolder ? 1 : 0);
         result = 31 * result + (mGrabCardImage ? 1 : 0);
+        result = 31 * result + (mShowPoweredBy ? 1 : 0);
         return result;
     }
 
@@ -91,6 +103,7 @@ public final class ScanCardRequest implements Parcelable {
         dest.writeByte(this.mScanExpirationDate ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mScanCardHolder ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mGrabCardImage ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.mShowPoweredBy ? (byte) 1 : (byte) 0);
     }
 
     protected ScanCardRequest(Parcel in) {
@@ -98,6 +111,7 @@ public final class ScanCardRequest implements Parcelable {
         this.mScanExpirationDate = in.readByte() != 0;
         this.mScanCardHolder = in.readByte() != 0;
         this.mGrabCardImage = in.readByte() != 0;
+        this.mShowPoweredBy = in.readByte() != 0;
     }
 
     public static final Parcelable.Creator<ScanCardRequest> CREATOR = new Parcelable.Creator<ScanCardRequest>() {

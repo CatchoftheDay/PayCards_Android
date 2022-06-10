@@ -34,7 +34,7 @@ public final class InitLibraryFragment extends Fragment {
 
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 1;
 
-    private View mProgressBar;
+//    private View mProgressBar;
     private CameraPreviewLayout mCameraPreviewLayout;
     private ViewGroup mMainContent;
     private @Nullable View mFlashButton;
@@ -57,7 +57,7 @@ public final class InitLibraryFragment extends Fragment {
         View root = inflater.inflate(R.layout.wocr_fragment_scan_card, container, false);
 
         mMainContent = root.findViewById(R.id.wocr_main_content);
-        mProgressBar = root.findViewById(R.id.wocr_progress_bar);
+//        mProgressBar = root.findViewById(R.id.wocr_progress_bar);
         mCameraPreviewLayout = root.findViewById(R.id.wocr_card_recognition_view);
         mFlashButton = root.findViewById(R.id.wocr_iv_flash_id);
 
@@ -75,7 +75,7 @@ public final class InitLibraryFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mProgressBar.setVisibility(View.GONE);
+//        mProgressBar.setVisibility(View.GONE);
         mMainContent.setVisibility(View.VISIBLE);
         mCameraPreviewLayout.setVisibility(View.VISIBLE);
         mCameraPreviewLayout.getSurfaceView().setVisibility(View.GONE);
@@ -115,7 +115,7 @@ public final class InitLibraryFragment extends Fragment {
     }
 
     private void subscribeToInitCore(Context context) {
-        if (mProgressBar != null) mProgressBar.setVisibility(View.VISIBLE);
+//        if (mProgressBar != null) mProgressBar.setVisibility(View.VISIBLE);
         if (mDeployCoreTask != null) mDeployCoreTask.cancel(false);
         mDeployCoreTask = new DeployCoreTask(this);
         mDeployCoreTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -133,7 +133,7 @@ public final class InitLibraryFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mProgressBar = null;
+//        mProgressBar = null;
 
     }
 
@@ -183,10 +183,10 @@ public final class InitLibraryFragment extends Fragment {
             super.onPostExecute(lastError);
             InitLibraryFragment fragment = fragmentRef.get();
             if (fragment == null
-                    || fragment.mProgressBar == null
+//                    || fragment.mProgressBar == null
                     || fragment.mListener == null) return;
 
-            fragment.mProgressBar.setVisibility(View.GONE);
+//            fragment.mProgressBar.setVisibility(View.GONE);
             if (lastError == null) {
                 fragment.mListener.onInitLibraryComplete();
             } else {

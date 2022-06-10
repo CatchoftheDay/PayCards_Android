@@ -153,7 +153,7 @@ public class CardDetailsActivity extends AppCompatActivity {
     }
 
     private void scanCard() {
-        Intent intent = new ScanCardIntent.Builder(this).build();
+        Intent intent = new ScanCardIntent.Builder(this).setShowPoweredBy(false).build();
         startActivityForResult(intent, REQUEST_CODE_SCAN_CARD);
     }
 

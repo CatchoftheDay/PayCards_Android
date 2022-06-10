@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:keepScreenOn="true"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:keepScreenOn="true"
     tools:context=".ui.ScanCardActivity">
 
     <RelativeLayout
@@ -24,25 +23,37 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:src="@drawable/wocr_ic_flash"
-            tools:visibility="visible"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="RtlHardcoded"
+            tools:visibility="visible" />
 
         <cards.pay.paycardsrecognizer.sdk.ui.views.ButtonWithTopBorder
-            style="@style/wocr_EnterManuallyButton"
             android:id="@+id/wocr_tv_enter_card_number_id"
+            style="@style/wocr_EnterManuallyButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:includeFontPadding="false"
             android:layout_gravity="bottom"
+            android:includeFontPadding="false"
             android:text="@string/wocr_button_enter_card_number" />
+
+        <ImageView
+            android:id="@+id/wocr_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="32dp"
+            android:padding="16dp"
+            android:src="@drawable/ic_card_back" />
 
     </RelativeLayout>
 
     <cards.pay.paycardsrecognizer.sdk.ui.views.ProgressBarIndeterminate
         android:id="@+id/wocr_progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:visibility="visible"/>
+        android:visibility="gone" />
 
 </FrameLayout>

@@ -16,6 +16,7 @@ import static cards.pay.paycardsrecognizer.sdk.ui.ScanCardRequest.DEFAULT_ENABLE
 import static cards.pay.paycardsrecognizer.sdk.ui.ScanCardRequest.DEFAULT_GRAB_CARD_IMAGE;
 import static cards.pay.paycardsrecognizer.sdk.ui.ScanCardRequest.DEFAULT_SCAN_CARD_HOLDER;
 import static cards.pay.paycardsrecognizer.sdk.ui.ScanCardRequest.DEFAULT_SCAN_EXPIRATION_DATE;
+import static cards.pay.paycardsrecognizer.sdk.ui.ScanCardRequest.DEFAULT_SHOW_POWERED_BY;
 
 public final class ScanCardIntent {
 
@@ -49,6 +50,8 @@ public final class ScanCardIntent {
         private boolean mScanCardHolder = DEFAULT_SCAN_CARD_HOLDER;
 
         private boolean mGrabCardImage = DEFAULT_GRAB_CARD_IMAGE;
+
+        private boolean mShowPoweredBy = DEFAULT_SHOW_POWERED_BY;
 
 
         public Builder(Context context) {
@@ -91,10 +94,15 @@ public final class ScanCardIntent {
             return this;
         }
 
+        public Builder setShowPoweredBy(boolean enable) {
+            mShowPoweredBy = enable;
+            return this;
+        }
+
         public Intent build() {
             Intent intent = new Intent(mContext, ScanCardActivity.class);
             ScanCardRequest request = new ScanCardRequest(mEnableSound, mScanExpirationDate,
-                    mScanCardHolder, mGrabCardImage);
+                    mScanCardHolder, mGrabCardImage, mShowPoweredBy);
             intent.putExtra(KEY_SCAN_CARD_REQUEST, request);
             return intent;
         }

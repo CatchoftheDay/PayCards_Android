@@ -47,6 +47,17 @@
             android:layout_height="wrap_content"
             android:text="@string/wocr_button_enter_card_number" />
 
+        <ImageView
+            android:id="@+id/wocr_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="32dp"
+            android:padding="16dp"
+            android:src="@drawable/ic_card_back" />
+
     </RelativeLayout>
 
     <cards.pay.paycardsrecognizer.sdk.ui.views.ProgressBarIndeterminate
@@ -54,6 +65,6 @@
         android:layout_gravity="center"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
 </FrameLayout>

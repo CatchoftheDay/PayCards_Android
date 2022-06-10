@@ -31,7 +31,7 @@ public class CardDetectionStateView extends View {
     private static final boolean DBG = Constants.DEBUG;
     private static final String TAG = "CardDetectionStateView";
 
-    private static final float RECT_CORNER_PADDING_LEFT = 1;
+    private static final float RECT_CORNER_PADDING_LEFT = -20;
 
     private static final float RECT_CORNER_PADDING_TOP = 1;
 

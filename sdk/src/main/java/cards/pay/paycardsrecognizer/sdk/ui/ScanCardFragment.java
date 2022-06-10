@@ -45,7 +45,7 @@ public class ScanCardFragment extends Fragment {
 
     private CameraPreviewLayout mCameraPreviewLayout;
 
-    private ProgressBarIndeterminate mProgressBar;
+//    private ProgressBarIndeterminate mProgressBar;
 
     private ViewGroup mMainContent;
 
@@ -97,7 +97,7 @@ public class ScanCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.wocr_fragment_scan_card, container, false);
 
-        mProgressBar = root.findViewById(R.id.wocr_progress_bar);
+//        mProgressBar = root.findViewById(R.id.wocr_progress_bar);
 
         mCameraPreviewLayout = root.findViewById(R.id.wocr_card_recognition_view);
         mMainContent = root.findViewById(R.id.wocr_main_content);
@@ -106,7 +106,7 @@ public class ScanCardFragment extends Fragment {
         initView(root);
 
         showMainContent();
-        mProgressBar.setVisibility(View.VISIBLE);
+//        mProgressBar.setVisibility(View.VISIBLE);
         return root;
     }
 
@@ -134,7 +134,7 @@ public class ScanCardFragment extends Fragment {
                 boolean isFlashSupported = (cameraParameters.getSupportedFlashModes() != null
                         && !cameraParameters.getSupportedFlashModes().isEmpty());
                 if (getView() == null) return;
-                mProgressBar.hideSlow();
+//                mProgressBar.hideSlow();
                 mCameraPreviewLayout.setBackgroundDrawable(null);
                 if (mFlashButton != null) mFlashButton.setVisibility(isFlashSupported ? View.VISIBLE : View.GONE);
 
@@ -143,7 +143,7 @@ public class ScanCardFragment extends Fragment {
 
             @Override
             public void onOpenCameraError(Exception exception) {
-                mProgressBar.hideSlow();
+//                mProgressBar.hideSlow();
                 hideMainContent();
                 finishWithError(exception);
             }
@@ -247,6 +247,14 @@ public class ScanCardFragment extends Fragment {
     }
 
     private void initView(View view) {
+        view.findViewById(R.id.wocr_iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onScanCardCanceled(ScanCardIntent.ADD_MANUALLY_PRESSED);
+                }
+            }
+        });
         view.findViewById(R.id.wocr_tv_enter_card_number_id).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -270,6 +278,9 @@ public class ScanCardFragment extends Fragment {
         link.setSpan(new URLSpan(Constants.PAYCARDS_URL), 0, link.length(), SpannableString.SPAN_INCLUSIVE_EXCLUSIVE);
         paycardsLink.setText(link);
         paycardsLink.setMovementMethod(LinkMovementMethod.getInstance());
+        if (!mRequest.isShowPoweredBy()) {
+            paycardsLink.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void showMainContent() {
